@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import SplitText from "@/animate/SplitText";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -81,7 +82,7 @@ const Hero = () => {
               variant="default"
               className={`${montserrat.className} bg-blue-500 hover:bg-blue-600 hover:cursor-pointer text-sm py-4 sm:py-6 px-6 w-full sm:w-auto`}
             >
-              Kenali Kami
+              <Link href={"/home"}>Kenali Kami</Link>
             </Button>
           </motion.div>
           <motion.div

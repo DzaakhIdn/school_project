@@ -10,15 +10,18 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700"],
 });
 
-const navigationMenuItems = [
-  { title: "Beranda", href: "/" },
-  { title: "Tentang", href: "/about" },
-  { title: "Program", href: "/programs" },
-];
+type navigationMenuItems = {
+  items: { title: string; href: string }[];
+}[];
 
-const Navigation = () => {
+type navbarProps = {
+  menuItems: navigationMenuItems;
+};
+
+const Navigation = (props: navbarProps) => {
   const [activeItem, setActiveItem] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  console.log(props.menuItems);
 
   useEffect(() => {
     const navItems = document.querySelectorAll(".nav-item");
@@ -31,9 +34,9 @@ const Navigation = () => {
       if (!link || !underline || !text) return;
 
       // Initial states
-      gsap.set(underline, { 
-        scaleX: 0, 
-        transformOrigin: "left center" 
+      gsap.set(underline, {
+        scaleX: 0,
+        transformOrigin: "left center",
       });
 
       const handleMouseEnter = () => {
@@ -44,7 +47,7 @@ const Navigation = () => {
         gsap.to(underline, {
           scaleX: 1,
           duration: 0.4,
-          ease: "power2.out"
+          ease: "power2.out",
         });
 
         // Animate text
@@ -53,7 +56,7 @@ const Navigation = () => {
           scale: 1.05,
           color: "#3b82f6",
           duration: 0.3,
-          ease: "power2.out"
+          ease: "power2.out",
         });
       };
 
@@ -64,7 +67,7 @@ const Navigation = () => {
         gsap.to(underline, {
           scaleX: 0,
           duration: 0.3,
-          ease: "power2.out"
+          ease: "power2.out",
         });
 
         // Animate text back
@@ -73,7 +76,7 @@ const Navigation = () => {
           scale: 1,
           color: "#374151",
           duration: 0.3,
-          ease: "power2.out"
+          ease: "power2.out",
         });
       };
 
@@ -90,32 +93,29 @@ const Navigation = () => {
   }, []);
 
   return (
-    <nav 
-      ref={navRef}
-      className="relative py-6 md:py-8 lg:py-10"
-    >
+    <nav ref={navRef} className="relative py-6 md:py-8 lg:py-10">
       <ul className="flex gap-8 md:gap-12 lg:gap-16 items-center justify-center">
-        {navigationMenuItems.map((item, index) => (
+        {props.menuItems.map((item, index) => (
           <li
-            key={item.title}
+            key={item.items[0].title}
             className="nav-item relative"
-            data-item={item.title}
+            data-item={item.items[0].title}
             style={{
-              animationDelay: `${index * 100}ms`
+              animationDelay: `${index * 100}ms`,
             }}
           >
-            <Link 
-              href={item.href} 
+            <Link
+              href={item.items[0].href}
               className="relative block px-2 py-1"
             >
-              <span 
+              <span
                 className={`nav-text relative z-10 text-base text-gray-700 transition-all duration-300 ${montserrat.className}`}
               >
-                {item.title}
+                {item.items[0].title}
               </span>
-              
+
               {/* Underline */}
-              <span 
+              <span
                 className="nav-underline absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"
                 style={{ transform: "scaleX(0)" }}
               />
@@ -128,4 +128,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-

@@ -10,12 +10,12 @@ const navItems = [
     items: [
       { title: "Beranda", href: "/" },
       { title: "Tentang", href: "/about" },
-      { title: "Program", href: "/programs" },
+      { title: "Galeri", href: "/gallery" },
     ],
   },
   {
     items: [
-      { title: "Galeri", href: "/gallery" },
+      { title: "Program", href: "/programs" },
       { title: "Blog", href: "/blog" },
       { title: "Kontak", href: "/contact" },
     ],
@@ -69,7 +69,7 @@ const Navbar = () => {
             alt="logo"
             width={100}
             height={100}
-            className="w-10 md:w-12 h-auto"
+            className={`h-auto transition-all duration-300 ${isScrolled ? "w-14 md:w-16" : "w-12 md:w-12"}`}
           />
         </div>
         

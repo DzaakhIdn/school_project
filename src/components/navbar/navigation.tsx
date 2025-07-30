@@ -20,11 +20,18 @@ interface MenuGrup {
 interface navbarProps {
   menuItems: MenuGrup[];
   index: number;
+  align?: string;
 }
-const Navigation = ({menuItems, index}: navbarProps) => {
+const Navigation = ({menuItems, index, align = "center" }: navbarProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeItem, setActiveItem] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
+
+  const justifyClass = {
+    end: "justify-end",
+    start: "justify-start",
+    center: "justify-center",
+  }[align];
 
   useEffect(() => {
     const navItems = document.querySelectorAll(".nav-item");
@@ -96,7 +103,7 @@ const Navigation = ({menuItems, index}: navbarProps) => {
 
   return (
     <nav ref={navRef} className="relative py-6 md:py-8 lg:py-10">
-        <ul className="flex gap-8 md:gap-12 lg:gap-16 items-center justify-center">
+        <ul className={`flex gap-8 md:gap-12 lg:gap-16 items-center ${justifyClass}`}>
           {menuItems[index].items.map((item, index) => (
             <li
               key={item.title}

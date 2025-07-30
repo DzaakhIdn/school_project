@@ -39,28 +39,41 @@ const Navbar = () => {
       }`}
     >
       {/* Desktop Navigation */}
-      <div className="h-full hidden lg:flex items-center justify-between max-w-screen-xl mx-auto sm:px-6 lg:px-8">
-        <Navigation menuItems={navItems} index={0} />
-        <Image
-          src={"/important/logo.png"}
-          alt="logo"
-          width={100}
-          height={100}
-          className={`w-12 h-auto transition-all duration-300 ${isScrolled ? "md:w-14" : "md:w-16"}`}
-        />
-        <Navigation menuItems={navItems} index={1} />
+      <div className="h-full hidden lg:flex items-center justify-between max-w-screen-xl mx-auto px-6 lg:px-8">
+        <div className="flex-1 flex justify-start">
+          <Navigation menuItems={navItems} index={0} align="start" />
+        </div>
+        
+        <div className="flex-shrink-0 mx-8">
+          <Image
+            src={"/important/logo.png"}
+            alt="logo"
+            width={100}
+            height={100}
+            className={`w-12 h-auto transition-all duration-300 ${
+              isScrolled ? "md:w-14" : "md:w-16"
+            }`}
+          />
+        </div>
+        
+        <div className="flex-1 flex justify-end">
+          <Navigation menuItems={navItems} index={1} align="end" />
+        </div>
       </div>
 
       {/* Mobile Navigation */}
-      <div className="h-full flex items-center justify-center lg:hidden px-4 sm:px-6 relative">
-        <Image
-          src={"/important/logo.png"}
-          alt="logo"
-          width={100}
-          height={100}
-          className="w-10 md:w-16 h-auto"
-        />
-        <div className="absolute right-4 sm:right-6">
+      <div className="h-full flex items-center lg:hidden px-4 sm:px-6 relative">
+        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <Image
+            src={"/important/logo.png"}
+            alt="logo"
+            width={100}
+            height={100}
+            className="w-10 md:w-12 h-auto"
+          />
+        </div>
+        
+        <div className="absolute right-4 sm:right-6 top-1/2 transform -translate-y-1/2">
           <NavigationSheet />
         </div>
       </div>
@@ -69,3 +82,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

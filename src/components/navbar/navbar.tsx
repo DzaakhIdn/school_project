@@ -1,12 +1,9 @@
+"use client";
 import Image from "next/image";
 import { NavigationSheet } from "./navigation-sheet";
 import Navigation from "./navigation";
-import { Montserrat } from "next/font/google";
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+import { motion, useScroll, useMotionValueEvent } from "motion/react";
+import { useState } from "react";
 
 const navItems = [
   {
@@ -26,37 +23,48 @@ const navItems = [
 ];
 
 const Navbar = () => {
-  return (
-    <div className={` ${montserrat.className}`}>
-      <nav className="h-16 md:h-20 lg:h-24 shadow">
-        {/* Desktop Navigation */}
-        <div className="h-full hidden lg:flex items-center justify-between max-w-screen-xl mx-auto sm:px-6 lg:px-8">
-          <Navigation menuItems={navItems} />
-          <Image
-            src={"/important/logo.png"}
-            alt="logo"
-            width={100}
-            height={100}
-            className="w-12 md:w-16 h-auto"
-          />
-          <Navigation menuItems={navItems} />
-        </div>
+  const { scrollY } = useScroll();
+  const [isScrolled, setIsScrolled] = useState(false);
 
-        {/* Mobile Navigation */}
-        <div className="h-full flex items-center justify-center lg:hidden px-4 sm:px-6 relative">
-          <Image
-            src={"/important/logo.png"}
-            alt="logo"
-            width={100}
-            height={100}
-            className="w-10 md:w-16 h-auto"
-          />
-          <div className="absolute right-4 sm:right-6">
-            <NavigationSheet />
-          </div>
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 50);
+  });
+  return (
+    <motion.nav
+      initial={false}
+      className={`h-16 md:h-20 fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-white/80 backdrop-blur-md shadow-md h-20"
+          : "bg-transparent lg:h-24"
+      }`}
+    >
+      {/* Desktop Navigation */}
+      <div className="h-full hidden lg:flex items-center justify-between max-w-screen-xl mx-auto sm:px-6 lg:px-8">
+        <Navigation menuItems={navItems} index={0} />
+        <Image
+          src={"/important/logo.png"}
+          alt="logo"
+          width={100}
+          height={100}
+          className={`w-12 h-auto transition-all duration-300 ${isScrolled ? "md:w-14" : "md:w-16"}`}
+        />
+        <Navigation menuItems={navItems} index={1} />
+      </div>
+
+      {/* Mobile Navigation */}
+      <div className="h-full flex items-center justify-center lg:hidden px-4 sm:px-6 relative">
+        <Image
+          src={"/important/logo.png"}
+          alt="logo"
+          width={100}
+          height={100}
+          className="w-10 md:w-16 h-auto"
+        />
+        <div className="absolute right-4 sm:right-6">
+          <NavigationSheet />
         </div>
-      </nav>
-    </div>
+      </div>
+    </motion.nav>
   );
 };
 

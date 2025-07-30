@@ -10,18 +10,21 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700"],
 });
 
-type navigationMenuItems = {
-  items: { title: string; href: string }[];
-}[];
-
-type navbarProps = {
-  menuItems: navigationMenuItems;
-};
-
-const Navigation = (props: navbarProps) => {
+interface MenuItem {
+  title: string;
+  href: string;
+}
+interface MenuGrup {
+  items: MenuItem[];
+}
+interface navbarProps {
+  menuItems: MenuGrup[];
+  index: number;
+}
+const Navigation = ({menuItems, index}: navbarProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeItem, setActiveItem] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
-  console.log(props.menuItems);
 
   useEffect(() => {
     const navItems = document.querySelectorAll(".nav-item");
@@ -33,7 +36,6 @@ const Navigation = (props: navbarProps) => {
 
       if (!link || !underline || !text) return;
 
-      // Initial states
       gsap.set(underline, {
         scaleX: 0,
         transformOrigin: "left center",
@@ -94,35 +96,33 @@ const Navigation = (props: navbarProps) => {
 
   return (
     <nav ref={navRef} className="relative py-6 md:py-8 lg:py-10">
-      <ul className="flex gap-8 md:gap-12 lg:gap-16 items-center justify-center">
-        {props.menuItems.map((item, index) => (
-          <li
-            key={item.items[0].title}
-            className="nav-item relative"
-            data-item={item.items[0].title}
-            style={{
-              animationDelay: `${index * 100}ms`,
-            }}
-          >
+        <ul className="flex gap-8 md:gap-12 lg:gap-16 items-center justify-center">
+          {menuItems[index].items.map((item, index) => (
+            <li
+              key={item.title}
+              className="nav-item relative"
+              data-item={item.title}
+              style={{
+                animationDelay: `${index * 100}ms`,
+              }}
+            >
             <Link
-              href={item.items[0].href}
+              href={item.href}
               className="relative block px-2 py-1"
             >
               <span
                 className={`nav-text relative z-10 text-base text-gray-700 transition-all duration-300 ${montserrat.className}`}
               >
-                {item.items[0].title}
+                {item.title}
               </span>
-
-              {/* Underline */}
               <span
                 className="nav-underline absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"
                 style={{ transform: "scaleX(0)" }}
               />
             </Link>
           </li>
-        ))}
-      </ul>
+          ))}
+        </ul>
     </nav>
   );
 };

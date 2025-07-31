@@ -62,8 +62,9 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="h-full flex items-center lg:hidden px-4 sm:px-6 relative">
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <div className="h-full flex items-center justify-between lg:hidden px-4 sm:px-6 relative">
+          <div className="w-10 h-10"></div>
+        <div className="flex items-center justify-center">
           <Image
             src={"/important/logo.png"}
             alt="logo"
@@ -73,14 +74,16 @@ const Navbar = () => {
           />
         </div>
         
-        <div className="absolute right-4 sm:right-6 top-1/2 transform -translate-y-1/2">
+        <div className="w-10 h-10">
           <NavigationSheet />
         </div>
+
       </div>
     </motion.nav>
   );
 };
 
 export default Navbar;
+
 
 

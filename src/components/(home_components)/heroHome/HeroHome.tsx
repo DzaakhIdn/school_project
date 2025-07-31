@@ -1,6 +1,7 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
-import React from "react";
 import { Space_Grotesk, Poppins } from "next/font/google";
 import BlurText from "@/animate/BlurText";
 
@@ -14,19 +15,17 @@ const poppins = Poppins({
   weight: ["100", "300", "400", "700", "900"],
 });
 
-const changePossition = () => {
-  console.log(window.scrollY)
-}
-
-window.addEventListener("scroll", changePossition);
 
 const HeroHome = () => {
 
   return (
-    <div className="mt-8 lg:mt-32 flex items-center justify-center border border-black">
-      <div id="heroHome" className="max-w-screen-xl w-full mx-auto grid lg:grid-cols-2 gap-12 px-6 py-12">
+    <div className="min-h-screen lg:mt-32 flex items-center justify-center">
+      <div
+        id="heroHome"
+        className="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 py-12 px-6 lg:px-0"
+      >
         <div>
-          <div className="flex justify-center lg:justify-start w-full opacity-0">
+          <div className="flex justify-center lg:justify-start w-full">
             <BlurText
               className={`${spaceGrotesk.className} flex justify-center lg:justify-start items-center mt-6 max-w-[17ch] text-blue-500 text-4xl md:text-5xl lg:text-[2.80rem] xl:text-5xl font-bold !leading-[1.2]`}
               text="Membina Generasi Rabbani di Era Digital"
@@ -37,30 +36,34 @@ const HeroHome = () => {
           </div>
 
           <p
-            className={`${poppins.className} mt-6 max-w-[60ch] text-base font-normal text-center lg:text-left opacity-0`}
+            className={`${poppins.className} mt-6 max-w-3xl mx-auto text-base font-normal text-center lg:text-left`}
           >
             Anakmu butuh lebih dari sekadar ijazah. Di HSI Boarding School, kami
             bentuk pemuda Qurani yang fasih bahasa, tangguh adab, dan melek
             teknologi. Mondok. Hafal Qur’an. Bisa Bahasa. Jago IT.
           </p>
-          <div className="mt-10 flex justify-center lg:justify-start items-center gap-4 opacity-0">
+          <div className="mt-10 flex flex-col lg:flex-row justify-center lg:justify-start items-center gap-4">
             <Button
               size="lg"
-              className={`${poppins.className} bg-blue-500 hover:bg-blue-600 hover:cursor-pointer text-sm py-4 sm:py-6 px-6 w-full sm:w-auto`}
+              className={`${poppins.className} bg-blue-500 hover:bg-blue-600 hover:cursor-pointer text-sm py-4 sm:py-6 px-6 w-full`}
             >
               Get Started <ArrowUpRight className="!h-5 !w-5" />
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className={`${poppins.className} text-sm py-4 sm:py-6 px-6 hover:cursor-pointer w-full sm:w-auto`}
+              className={`${poppins.className} text-sm py-4 sm:py-6 px-6 hover:cursor-pointer w-full`}
             >
               <CirclePlay className="!h-5 !w-5" /> Tonton Video
             </Button>
           </div>
         </div>
-        <div id="video" className="w-full aspect-video bg-accent rounded-xl">
-          <video src="" width={100}></video>
+
+        <div
+          id="video"
+          className="video_container transition-transform duration-500"
+        >
+          <div className="aspect-video bg-gray-200 rounded-lg shadow-md"></div>
         </div>
       </div>
     </div>

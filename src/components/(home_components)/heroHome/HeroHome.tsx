@@ -2,8 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
-import { Space_Grotesk, Poppins } from "next/font/google";
+import Link from "next/link";
+import { Montserrat, Space_Grotesk, Poppins } from "next/font/google";
 import BlurText from "@/animate/BlurText";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -15,14 +21,12 @@ const poppins = Poppins({
   weight: ["100", "300", "400", "700", "900"],
 });
 
-
 const HeroHome = () => {
-
   return (
-    <div className="min-h-screen lg:mt-32 flex items-center justify-center">
+    <div className="min-h-screen md:mt-32 lg:mt-0 flex items-center justify-center">
       <div
         id="heroHome"
-        className="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 py-12 px-6 lg:px-0"
+        className="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 py-12 px-6 xl:px-0"
       >
         <div>
           <div className="flex justify-center lg:justify-start w-full">
@@ -42,17 +46,17 @@ const HeroHome = () => {
             bentuk pemuda Qurani yang fasih bahasa, tangguh adab, dan melek
             teknologi. Mondok. Hafal Qur’an. Bisa Bahasa. Jago IT.
           </p>
-          <div className="mt-10 flex flex-col lg:flex-row justify-center lg:justify-start items-center gap-4">
+          <div className="mt-8 flex items-center flex-col lg:flex-row gap-4 justify-center lg:justify-start">
             <Button
-              size="lg"
-              className={`${poppins.className} bg-blue-500 hover:bg-blue-600 hover:cursor-pointer text-sm py-4 sm:py-6 px-6 w-full`}
+              variant="default"
+              className={`${montserrat.className} bg-blue-500 hover:bg-blue-600 hover:cursor-pointer text-sm py-5 sm:py-6 px-6 w-full lg:w-auto`}
             >
               Get Started <ArrowUpRight className="!h-5 !w-5" />
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className={`${poppins.className} text-sm py-4 sm:py-6 px-6 hover:cursor-pointer w-full`}
+              className="rounded-md text-base shadow-none hover:cursor-pointer py-5 sm:py-6 px-6 w-full lg:w-auto"
             >
               <CirclePlay className="!h-5 !w-5" /> Tonton Video
             </Button>
@@ -63,7 +67,7 @@ const HeroHome = () => {
           id="video"
           className="video_container transition-transform duration-500"
         >
-          <div className="aspect-video bg-gray-200 rounded-lg shadow-md"></div>
+          <div className="aspect-video bg-gray-200 rounded-lg shadow-md border-2 border-amber-400"></div>
         </div>
       </div>
     </div>

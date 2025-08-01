@@ -31,7 +31,7 @@ const HeroHome = () => {
         <div>
           <div className="flex justify-center lg:justify-start w-full">
             <BlurText
-              className={`${spaceGrotesk.className} flex justify-center lg:justify-start items-center mt-6 max-w-[17ch] text-blue-500 text-4xl md:text-5xl lg:text-[2.80rem] xl:text-5xl font-bold !leading-[1.2]`}
+              className={`${spaceGrotesk.className} flex justify-center lg:justify-start items-center mt-6 max-w-[17ch] text-blue-500 text-4xl md:text-5xl lg:text-[3rem] xl:text-5xl font-bold !leading-[1.2]`}
               text="Membina Generasi Rabbani di Era Digital"
               delay={150}
               animateBy="words"

@@ -1,15 +1,8 @@
 import { Space_Grotesk, Montserrat } from "next/font/google";
 import ScrollReveal from "@/animate/ScrollReveal";
 import { ModalDialogImage } from "@/components/alert/modal_dialog";
-import { useRef, useState } from "react";
-import { useClientRect } from "minimal-shared/hooks";
-import {
-  m,
-  useSpring,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -24,16 +17,16 @@ const montserrat = Montserrat({
 export default function Gallery() {
   return (
     <>
-      <div className=" md:mt-32 lg:mt-0 flex items-center justify-center flex-col transition-all duration-300 border border-black">
-        <div className="my-10 lg:my-0 lg:mb-10 flex flex-col justify-center px-6 items-center gap-4 md:gap-3 max-w-6xl w-full mx-auto">
-          <div className="text-container flex flex-col justify-center items-center">
+      <div className="lg:mt-32 md:mt-16 flex items-center justify-center flex-col transition-all duration-300">
+        <div className="my-8 lg:my-0 lg:mb-8 flex flex-col justify-center px-6 items-center gap-4 md:gap-3 max-w-6xl w-full mx-auto">
+          <div className="text-container flex flex-col justify-center items-center space-y-4">
             <div
               className={`${spaceGrotesk.className} font-bold text-yellow-500 text-xl lg:text-3xl`}
             >
               <p>{`< Kegiatan Seru Santri />`}</p>
             </div>
             <div
-              className={`${montserrat.className} text-center font-extrabold tracking-tight text-2xl text-blue-500 md:text-3xl`}
+              className={`${montserrat.className} text-center font-extrabold tracking-tight text-2xl text-blue-500 md:text-3xl lg:text-4xl`}
             >
               <ScrollReveal
                 baseOpacity={0}
@@ -44,9 +37,9 @@ export default function Gallery() {
                 Keseruan Santri di HSI Boarding School
               </ScrollReveal>
             </div>
-            <div className="desc_Sect">
+            <div className="desc_Sect max-w-4xl">
               <p
-                className={`${montserrat.className} text-center text-sm md:text-base lg:text-lg text-slate-700`}
+                className={`${montserrat.className} text-center text-sm md:text-base lg:text-lg text-slate-700 leading-relaxed`}
               >
                 Selama belajar di HSI, para santri nggak cuma fokus akademik dan
                 tahfidz, tapi juga aktif ikut berbagai acara seru yang
@@ -55,8 +48,9 @@ export default function Gallery() {
               </p>
             </div>
           </div>
-          {/* Full width gallery container */}
         </div>
+        {/* Gallery container dengan spacing yang tepat */}
+        <ScrollableContent />
       </div>
     </>
   );
@@ -64,76 +58,75 @@ export default function Gallery() {
 
 //
 
-function scrollableContent() {
+function ScrollableContent() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Baris 1: ke kiri, Baris 2: ke kanan
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const xReverse = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
+
+  const data = [
+    { img: "img-thumb-1.jpg", title: "Kegiatan Olahraga" },
+    { img: "img-thumb-2.jpg", title: "Kegiatan Seni" },
+    { img: "img-thumb-1.jpg", title: "Kegiatan Akademik" },
+    { img: "img-thumb-2.jpg", title: "Kegiatan Rohani" },
+    { img: "img-thumb-1.jpg", title: "Kegiatan Sosial" },
+    { img: "img-thumb-2.jpg", title: "Kegiatan Ekstrakurikuler" },
+  ];
+
   return (
-    <div className="w-full overflow-hidden p-5">
-      <div className="flex gap-4 overflow-x-auto scrollbar-hide px-6">
-        {/* First row */}
-        <div className="flex-shrink-0 w-64 h-64">
-          <ModalDialogImage
-            image_triger="/assets/thumbnail/img-thumb-1.jpg"
-            image="/assets/thumbnail/img-thumb-1.jpg"
-            title="Kegiatan 1"
-            description="Deskripsi Kegiatan 1"
-          />
-        </div>
-        <div className="flex-shrink-0 w-64 h-64">
-          <ModalDialogImage
-            image_triger="/assets/thumbnail/img-thumb-2.jpg"
-            image="/assets/thumbnail/img-thumb-2.jpg"
-            title="Kegiatan 2"
-            description="Deskripsi Kegiatan 2"
-          />
-        </div>
-        <div className="flex-shrink-0 w-64 h-64">
-          <ModalDialogImage
-            image_triger="/assets/thumbnail/img-thumb-3.jpg"
-            image="/assets/thumbnail/img-thumb-3.jpg"
-            title="Kegiatan 3"
-            description="Deskripsi Kegiatan 3"
-          />
-        </div>
-        <div className="flex-shrink-0 w-64 h-64">
-          <ModalDialogImage
-            image_triger="/assets/thumbnail/img-thumb-4.jpg"
-            image="/assets/thumbnail/img-thumb-4.jpg"
-            title="Kegiatan 4"
-            description="Deskripsi Kegiatan 4"
-          />
-        </div>
-        <div className="flex-shrink-0 w-64 h-64">
-          <ModalDialogImage
-            image_triger="/assets/thumbnail/img-thumb-1.jpg"
-            image="/assets/thumbnail/img-thumb-1.jpg"
-            title="Kegiatan 5"
-            description="Deskripsi Kegiatan 5"
-          />
-        </div>
-        <div className="flex-shrink-0 w-64 h-64">
-          <ModalDialogImage
-            image_triger="/assets/thumbnail/img-thumb-2.jpg"
-            image="/assets/thumbnail/img-thumb-2.jpg"
-            title="Kegiatan 6"
-            description="Deskripsi Kegiatan 6"
-          />
-        </div>
-        <div className="flex-shrink-0 w-64 h-64">
-          <ModalDialogImage
-            image_triger="/assets/thumbnail/img-thumb-3.jpg"
-            image="/assets/thumbnail/img-thumb-3.jpg"
-            title="Kegiatan 7"
-            description="Deskripsi Kegiatan 7"
-          />
-        </div>
-        <div className="flex-shrink-0 w-64 h-64">
-          <ModalDialogImage
-            image_triger="/assets/thumbnail/img-thumb-4.jpg"
-            image="/assets/thumbnail/img-thumb-4.jpg"
-            title="Kegiatan 8"
-            description="Deskripsi Kegiatan 8"
-          />
+    <div ref={containerRef} className="w-full h-[250vh] relative">
+      <div className="sticky top-0 h-screen flex items-center justify-center bg-white">
+        <div className="relative w-full px-4 py-5 sm:px-6 lg:px-8 overflow-hidden">
+          <motion.div
+            style={{ x }}
+            className="flex gap-6 min-w-max pb-6"
+          >
+            {data.map((item, idx) => (
+              <div
+                key={`baris1-${idx}`}
+                className="flex-shrink-0 w-48 h-72 sm:w-56 sm:h-80 md:w-64 md:h-88 lg:w-72 lg:h-96 xl:w-80 xl:h-[26rem] 2xl:w-84 2xl:h-[28rem]"
+              >
+                <div className="w-full h-full rounded-xl overflow-hidden transition-all duration-300 transform hover:scale-105">
+                  <ModalDialogImage
+                    image_triger={`/assets/thumbnail/${item.img}`}
+                    image={`/assets/thumbnail/${item.img}`}
+                    title={item.title}
+                    description={`Deskripsi lengkap tentang ${item.title} yang dilakukan oleh para santri HSI Boarding School`}
+                  />
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            style={{ x: xReverse }}
+            className="flex gap-6 min-w-max pt-6"
+          >
+            {data.map((item, idx) => (
+              <div
+                key={`baris2-${idx}`}
+                className="flex-shrink-0 w-48 h-72 sm:w-56 sm:h-80 md:w-64 md:h-88 lg:w-72 lg:h-96 xl:w-80 xl:h-[26rem] 2xl:w-84 2xl:h-[28rem]"
+              >
+                <div className="w-full h-full rounded-xl overflow-hidden transition-all duration-300 transform hover:scale-105">
+                  <ModalDialogImage
+                    image_triger={`/assets/thumbnail/${item.img}`}
+                    image={`/assets/thumbnail/${item.img}`}
+                    title={item.title}
+                    description={`Deskripsi lengkap tentang ${item.title} yang dilakukan oleh para santri HSI Boarding School`}
+                  />
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </div>
   );
 }
+

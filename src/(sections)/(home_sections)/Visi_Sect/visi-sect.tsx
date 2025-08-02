@@ -37,14 +37,14 @@ interface TabContent {
 
 const content: Record<TabKey, TabContent> = {
   visi: {
-    title: "Visi",
+    title: "Membina Generasi Pemimpin yang Beradab, Berilmu, dan Berwawasan Global",
     description:
       "Membina generasi pemimpin yang beradab, berilmu, dan berwawasan global",
     img_title: "Belajar Ilmu Al Quran & Hadits",
     img: "/assets/thumbnail/img-thumb-1.jpg",
   },
   misi: {
-    title: "Misi",
+    title: "Belajar Ilmu Al Quran, Mengamalkan Sunnah, dan Berprestasi",
     description:
       "Membina generasi pemimpin yang beradab, berilmu, dan berwawasan global",
     img_title: "Belajar Ilmu Al Quran & Hadits",
@@ -82,12 +82,12 @@ export default function VisiSect(): JSX.Element {
                   <Button
                     key={tab}
                     onClick={() => setTabActive(tab)}
-                    className={`bg-blue-500 text-white text-base ${
+                    className={`text-slate-700 text-base ${
                       montserrat.className
-                    } font-semibold px-20 py-5 hover:cursor-pointer ${
+                    } font-semibold px-20 py-5 hover:cursor-pointer hover:bg-blue-500 hover:text-white ${
                       activeTab === tab
                         ? "bg-blue-500 text-white"
-                        : "bg-transparent border border-slate-700 text-gray-800"
+                        : "bg-transparent border border-slate-700"
                     }`}
                   >
                     {tab === "visi" ? "Visi" : "Misi"}
@@ -135,10 +135,10 @@ export default function VisiSect(): JSX.Element {
                 </p>
               </div>
             </div>
-            <div className="button-learn lg:hidden w-full">
+            <div className="button-learn lg:hidden w-full group">
               <Button variant={"outline"} className="py-6 w-full">
                 <span
-                  className={`${poppins.className} text-base hover:cursor-pointer hover:text-blue-500`}
+                  className={`${poppins.className} text-base group-hover:cursor-pointer group-hover:text-blue-500`}
                 >
                   Selengkapnya
                 </span>

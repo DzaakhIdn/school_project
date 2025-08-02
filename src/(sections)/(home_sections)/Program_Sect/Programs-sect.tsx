@@ -15,7 +15,7 @@ const montserrat = Montserrat({
 export default function Page() {
   return (
     <>
-      <div className="min-h-screen md:mt-32 lg:mt-0 flex items-center justify-center flex-col">
+      <div className="min-h-screen md:mt-32 lg:mt-32 flex items-center justify-center flex-col">
         <div className="header_container my-10 lg:my-0 lg:mb-10 flex flex-col justify-center px-6 items-center gap-4 md:gap-3 max-w-6xl w-full mx-auto">
           <div
             className={`${spaceGrotesk.className} font-bold text-yellow-500 text-xl lg:text-3xl`}

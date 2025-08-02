@@ -67,7 +67,7 @@ function ScrollableContent() {
   });
 
   // Baris 1: ke kiri, Baris 2: ke kanan
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const xReverse = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
 
   const data = [

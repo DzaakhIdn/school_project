@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
-import Link from "next/link";
 import { Montserrat, Space_Grotesk, Poppins } from "next/font/google";
 import BlurText from "@/animate/BlurText";
 
